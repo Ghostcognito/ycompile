@@ -1,0 +1,11 @@
+#!/bin/bash
+# From /etc/rc.d/rc.local
+# This is a script to be used for easy compiling of assembly code with yasm
+# The input is the .asm file and is the only argument needed call it like so:
+# ycompile filename.asm
+inputF=$1
+outputF=${inputF%.asm}.o
+yasm -f elf64 -o $outputF $inputF
+fileName=${inputF%.asm}
+ld -d -o $fileName $outputF
+rm $outputF
